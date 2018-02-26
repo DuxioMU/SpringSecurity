@@ -10,6 +10,7 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -23,6 +24,11 @@ import java.util.List;
 @RestController
 @EnableSwagger2
 public class UserController {
+
+    @GetMapping("/me")
+    public Object getCurrentUser(Authentication authentication){
+        return authentication;
+    }
 
     @PutMapping("/{id:\\d+}")
     public User update(@Valid @RequestBody User user, BindingResult errors) {
