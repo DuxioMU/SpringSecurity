@@ -1,4 +1,4 @@
-package com.imooc.security.core.authentication.properties;
+package com.imooc.security.core.properties;
 
 public class BrowserProperties {
 
@@ -6,6 +6,7 @@ public class BrowserProperties {
 
     private LoginType loginType = LoginType.JSON;
 
+    private  int rememberMeSecods = 3600;
 
     public LoginType getLoginType() {
         return loginType;
@@ -22,5 +23,13 @@ public class BrowserProperties {
     public void setLoginPage(String loginPage)
     {
         this.loginPage = loginPage;
+    }
+
+    public int getRememberMeSecods() {
+        return rememberMeSecods;
+    }
+
+    public void setRememberMeSecods(int rememberMeSecods) {
+        this.rememberMeSecods = rememberMeSecods;
     }
 }

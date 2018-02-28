@@ -1,6 +1,5 @@
-package com.imooc.security.core.authentication.properties;
+package com.imooc.security.core.properties;
 
-import com.imooc.security.core.authentication.properties.BrowserProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**

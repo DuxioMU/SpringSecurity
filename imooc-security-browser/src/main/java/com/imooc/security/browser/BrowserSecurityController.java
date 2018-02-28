@@ -1,7 +1,7 @@
 package com.imooc.security.browser;
 
 import com.imooc.security.browser.support.SimpleResponse;
-import com.imooc.security.core.authentication.properties.SecurityProperties;
+import com.imooc.security.core.properties.SecurityProperties;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

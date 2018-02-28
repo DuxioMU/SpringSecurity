@@ -1,35 +1,22 @@
-package com.imooc.security.core.authentication.validate.code;
+package com.imooc.security.core.validate.code;
 
-import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.chrono.ChronoLocalDateTime;
 
-public class ImageCode {
-
-    private BufferedImage image;
+public class ValidateCode {
 
     private String code;
 
     private LocalDateTime expireTime;
-    //当前时间之后多少秒过期
-    public ImageCode(BufferedImage image, String code, int expireIn) {
-        this.image = image;
+
+    public ValidateCode(String code,int expireIn) {
         this.code = code;
         this.expireTime = LocalDateTime.now().plusSeconds(expireIn);
     }
 
-    public ImageCode(BufferedImage image, String code, LocalDateTime expireTime) {
-        this.image = image;
+    public ValidateCode(String code, LocalDateTime expireTime) {
         this.code = code;
         this.expireTime = expireTime;
-    }
-
-    public BufferedImage getImage() {
-        return image;
-    }
-
-    public void setImage(BufferedImage image) {
-        this.image = image;
     }
 
     public String getCode() {
@@ -47,8 +34,7 @@ public class ImageCode {
     public void setExpireTime(LocalDateTime expireTime) {
         this.expireTime = expireTime;
     }
-
-    public boolean isExpried() {
+    public  boolean isExpireTime(){
         return LocalDateTime.now().isAfter(expireTime);
     }
 }

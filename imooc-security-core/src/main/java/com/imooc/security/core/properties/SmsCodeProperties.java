@@ -1,9 +1,8 @@
-package com.imooc.security.core.authentication.properties;
+package com.imooc.security.core.properties;
 
-public class ImageCodeProperties {
+public class SmsCodeProperties {
     //默认配置
-    private int width = 67;
-    private int height = 23;
+
     private int length = 4;
     private int expireIn = 60;
 
@@ -15,22 +14,6 @@ public class ImageCodeProperties {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     public int getLength() {

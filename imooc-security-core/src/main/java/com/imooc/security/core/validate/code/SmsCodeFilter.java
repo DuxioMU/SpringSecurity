@@ -1,6 +1,7 @@
-package com.imooc.security.core.authentication.validate.code;
+package com.imooc.security.core.validate.code;
 
-import com.imooc.security.core.authentication.properties.SecurityProperties;
+import com.imooc.security.core.properties.SecurityProperties;
+import com.sun.org.apache.bcel.internal.classfile.Code;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -20,8 +21,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-
-public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean{
+public class SmsCodeFilter extends OncePerRequestFilter implements InitializingBean {
 
 
     //@Autowired
@@ -33,16 +33,16 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
     private SecurityProperties securityProperties;
 
-    private AntPathMatcher pathMatcher= new AntPathMatcher();
+    private AntPathMatcher pathMatcher = new AntPathMatcher();
 
     @Override
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
-        String[] configUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(securityProperties.getCode().getImage().getUrl(),",");
-        for (String configUrl :configUrls){
+        String[] configUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(securityProperties.getCode().getSms().getUrl(), ",");
+        for (String configUrl : configUrls) {
             urls.add(configUrl);
         }
-        urls.add("/authentication/form");
+        urls.add("/authentication/mobile");
     }
     //工具
 
@@ -53,32 +53,31 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 //                && StringUtils.equalsIgnoreCase(httpServletRequest.getMethod(),"post")){
 
         boolean action = false;
-        for (String url : urls){
-            if(pathMatcher.match(url,httpServletRequest.getRequestURI())){
+        for (String url : urls) {
+            if (pathMatcher.match(url, httpServletRequest.getRequestURI())) {
                 action = true;
             }
         }
-        if(action){
-            try{
+        if (action) {
+            try {
                 validate(new ServletWebRequest(httpServletRequest));
-            }catch(ValidateCodeException e){
-                authenticationFailureHandler.onAuthenticationFailure(httpServletRequest,httpServletResponse,e);
+            } catch (ValidateCodeException e) {
+                logger.info("验证码校验失败：" + e.getMessage());
+                authenticationFailureHandler.onAuthenticationFailure(httpServletRequest, httpServletResponse, e);
                 return;
             }
-        }else{
-            filterChain.doFilter(httpServletRequest,httpServletResponse);
         }
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
     private void validate(ServletWebRequest servletWebRequest) throws ServletRequestBindingException {
 
         //ValidateCodeType codeType = getValidateCodeType(request);
-        ImageCode codeInSession = (ImageCode)(sessionStrategy.getAttribute(servletWebRequest ,ValidateCodeController.SESSION_KEY ));
+        ValidateCode codeInSession = (ValidateCode) sessionStrategy.getAttribute(servletWebRequest, ValidateCodeProcessor.SESSION_KEY_PREFIX + "SMS");
 
-       // C codeInSession = (C) validateCodeRepository.get(request, codeType);
+        // C codeInSession = (C) validateCodeRepository.get(request, codeType);
 
-        String codeInRequest = ServletRequestUtils.getStringParameter(servletWebRequest.getRequest(),"imageCode");
-
+        String codeInRequest = ServletRequestUtils.getStringParameter(servletWebRequest.getRequest(), "smsCode");
 
 //        try {
 //            codeInRequest = ServletRequestUtils.getStringParameter(request.getRequest(),
@@ -88,22 +87,23 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 //        }
 
         if (StringUtils.isBlank(codeInRequest)) {
-            throw new ValidateCodeException( "验证码的值不能为空");
+            throw new ValidateCodeException("验证码的值不能为空");
         }
 
         if (codeInSession == null) {
-            throw new ValidateCodeException( "验证码不存在");
+            throw new ValidateCodeException("验证码不存在");
         }
 
-        if (codeInSession.isExpried()){
-            sessionStrategy.removeAttribute(servletWebRequest,ValidateCodeController.SESSION_KEY);       throw new ValidateCodeException( "验证码已过期");
+        if (codeInSession.isExpireTime()) {
+            sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeProcessor.SESSION_KEY_PREFIX + "SMS");
+            throw new ValidateCodeException("验证码已过期");
         }
 
         if (!StringUtils.equals(codeInSession.getCode(), codeInRequest)) {
-            throw new ValidateCodeException( "验证码不匹配");
+            throw new ValidateCodeException("验证码不匹配");
         }
 
-        sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeController.SESSION_KEY);
+        sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeProcessor.SESSION_KEY_PREFIX + "SMS");
 
     }
 
@@ -121,5 +121,29 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
     public void setSecurityProperties(SecurityProperties securityProperties) {
         this.securityProperties = securityProperties;
+    }
+
+    public SessionStrategy getSessionStrategy() {
+        return sessionStrategy;
+    }
+
+    public void setSessionStrategy(SessionStrategy sessionStrategy) {
+        this.sessionStrategy = sessionStrategy;
+    }
+
+    public Set<String> getUrls() {
+        return urls;
+    }
+
+    public void setUrls(Set<String> urls) {
+        this.urls = urls;
+    }
+
+    public AntPathMatcher getPathMatcher() {
+        return pathMatcher;
+    }
+
+    public void setPathMatcher(AntPathMatcher pathMatcher) {
+        this.pathMatcher = pathMatcher;
     }
 }
