@@ -2,19 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cf51e5ee-f2f7-4d58-a732-3e40a5538b9f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imooc-security-core/src/main/java/com/imooc/security/core/social/SocialConfig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imooc-security-core/src/main/java/com/imooc/security/core/social/qq/api/QQ.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imooc-security-core/src/main/java/com/imooc/security/core/social/qq/api/QQImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imooc-security-core/src/main/java/com/imooc/security/core/social/qq/api/QQUserInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imooc-security-core/src/main/java/com/imooc/security/core/social/qq/connet/QQAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imooc-security-core/src/main/java/com/imooc/security/core/social/qq/connet/QQConnectionFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../imooc-security-core/src/main/java/com/imooc/security/core/social/qq/connet/QQServiceProvider.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imooc-security-browser/imooc-security-browser.iml" afterPath="$PROJECT_DIR$/../imooc-security-browser/imooc-security-browser.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../imooc-security-browser/src/main/java/com/imooc/security/browser/MyUserDetailsService.java" afterPath="$PROJECT_DIR$/../imooc-security-browser/src/main/java/com/imooc/security/browser/MyUserDetailsService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -411,6 +398,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="GO_FMT" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -575,12 +563,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1519820154028</updated>
-      <workItem from="1519820157191" duration="7782000" />
+      <workItem from="1519820157191" duration="7847000" />
     </task>
+    <task id="LOCAL-00001" summary="QQ登入">
+      <created>1519830890301</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1519830890301</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7782000" />
+    <option name="totallyTimeSpent" value="7847000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -622,6 +618,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="QQ登入" />
+    <option name="LAST_COMMIT_MESSAGE" value="QQ登入" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
