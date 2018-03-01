@@ -2,7 +2,7 @@ package com.imooc.security.browser;
 
 
 import com.imooc.security.core.authentication.FormAuthenticationConfig;
-import com.imooc.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
+import com.imooc.security.core.authentication.sms.SmsCodeAuthenticationSecurityConfig;
 import com.imooc.security.core.properties.SecurityConstants;
 import com.imooc.security.core.properties.SecurityProperties;
 import com.imooc.security.core.validate.code.ValidateCodeSecurityConfig;

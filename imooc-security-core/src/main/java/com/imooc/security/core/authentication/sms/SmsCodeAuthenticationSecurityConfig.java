@@ -1,4 +1,4 @@
-package com.imooc.security.core.authentication.mobile;
+package com.imooc.security.core.authentication.sms;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
